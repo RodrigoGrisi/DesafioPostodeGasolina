@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
-
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity,Modal } from 'react-native';
+import ModalContent from './src/Modal';
 export default function App() {
   const [gasolina, setGasolina] = useState();
   const [alcool, setAlcool] = useState();
@@ -12,12 +12,14 @@ export default function App() {
       <Text style={styles.textTitleApp}>Qual a melhor Opção ?</Text>
       <Text style={styles.textTitle}>Álcool (Preço por litro)</Text>
       <TextInput
+        keyboardType='numeric'
         style={styles.textInput}
         value={gasolina}
         onChange={(value) => setGasolina(value)}
       />
       <Text style={styles.textTitle} >Gasolina (Preço por litro)</Text>
       <TextInput
+        keyboardType='numeric'
         style={styles.textInput}
         value={alcool}
         onChange={(value) => setAlcool(value)}
@@ -29,6 +31,11 @@ export default function App() {
       fontWeight: 'bold', height: 45,
       borderRadius: 50,} }> Calcular </Text>
       </TouchableOpacity>
+
+    <Modal>
+    <ModalContent />
+    </Modal>
+
 
       <StatusBar style="auto" />
     </View>
