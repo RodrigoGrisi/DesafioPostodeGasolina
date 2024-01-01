@@ -15,6 +15,8 @@ export default function App() {
 
 
   function voltar (){
+    setGasolina(0)
+    setAlcool(0)
     return setvisibleModal(false)
   }
 
@@ -23,9 +25,15 @@ export default function App() {
     const alcoolValue = parseFloat(alcool);
     const gasolinaValue = parseFloat(gasolina);
   
-    if (alcoolValue === 0 || alcoolValue === "") {
+    if (alcoolValue === "" || alcoolValue === 0) {
+      alert("Digite um valor valido para a Alcool")
       return;
+    }else if (gasolinaValue === "" || gasolinaValue === 0) {
+      alert("Digite um valor valido para a Gasolina")
+      return;
+
     }
+
 
     let resultado = alcoolValue / gasolinaValue
 

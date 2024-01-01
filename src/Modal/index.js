@@ -6,7 +6,7 @@ export default function ModalContent(props) {
     <View style={styles.modalcontent}>
 
       <View style={{justifyContent: 'flex-end', alignItems: 'flex-end', width: '60%'}}>
-        <TouchableOpacity style={styles.btnFechar} onPress={props.voltar}>
+        <TouchableOpacity style={styles.btnFechar} onPress={props.voltar()}>
           <Text style={{
             justifyContent: 'flex-end',
             textAlign: 'center', fontSize: 18, color: '#fff', height: 25,
