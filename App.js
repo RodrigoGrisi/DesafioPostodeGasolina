@@ -2,20 +2,24 @@ import React, { useEffect, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
-  StyleSheet, Text, View, TextInput, Image, TouchableOpacity, Modal, Animated
+  StyleSheet, Text, View, TextInput, Image,
+  TouchableOpacity, Modal, Animated
 } from 'react-native';
 import ModalContent from './src/Modal';
+import * as Animatable from 'react-native-animatable'
+
 
 export default function App() {
   const [gasolina, setGasolina] = useState(0);
   const [alcool, setAlcool] = useState(0);
   const [visibleModal, setvisibleModal] = useState(false);
   const [resultado, setResultado] = useState();
-  const [finishAnimate, setfinishAnimate] = useState(false);
 
   const WidhAnimate = useRef(new Animated.Value(0)).current;
   const heightAnimate = useRef(new Animated.Value(10)).current;
   const textOpaciti = useRef(new Animated.Value(0)).current
+
+  const ButtonAnimated = Animatable.createAnimatableComponent(TouchableOpacity)
 
   useEffect(() => {
 
@@ -38,7 +42,7 @@ export default function App() {
       })
 
     ]).start(() => {
-      alert("Seja bem vindo ao nosso App." + "\n" + "\n" +
+      console.log("Seja bem vindo ao nosso App." + "\n" + "\n" +
         "Veja qual melhor combustivel para sua viagem")
     });
 
@@ -112,14 +116,16 @@ export default function App() {
         onChangeText={(value) => setGasolina(value)}
       />
 
-      <TouchableOpacity style={styles.calularBtn} onPress={calcular}>
-        <Text style={{
-          justifyContent: 'center',
-          textAlign: 'center', fontSize: 25, color: '#fff',
-          fontWeight: 'bold', height: 45,
-          borderRadius: 50,
-        }}> Calcular </Text>
-      </TouchableOpacity>
+      <ButtonAnimated style={styles.calularBtn} 
+      animation="fadeInUp"
+      onPress={calcular} 
+      >
+        <Animatable.Text
+          duration={3000}
+          iterationCount={Infinity}
+          animation="pulse"
+          style={styles.TextBtnCalcular}> Calcular </Animatable.Text>
+      </ButtonAnimated>
 
       <Modal transparent={true} animationType='slide' visible={visibleModal}>
         <ModalContent alcoolValue={alcool}
@@ -159,10 +165,16 @@ const styles = StyleSheet.create({
     width: '80%'
   },
   calularBtn: {
-    alignItems: 'center',
-    justifyContent: 'center',
     width: '80%',
     marginTop: 20,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
+    height: 45,
+    justifyContent: 'center'
+  },
+  TextBtnCalcular: {
+    textAlign: 'center',
+    fontSize: 25,
+    color: '#fff',
+    fontWeight: 'bold',
   }
 });

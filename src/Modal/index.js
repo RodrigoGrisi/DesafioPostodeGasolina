@@ -1,5 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+  import * as Animatable from 'react-native-animatable'
+
+
+const ButtonAnimated = Animatable.createAnimatableComponent(TouchableOpacity)
 
 export default function ModalContent(props) {
   return (
@@ -26,13 +30,13 @@ export default function ModalContent(props) {
         <Text style={styles.textInfo}> Gasolina: {props.gasolinaValue}</Text>
 
       </View>
-      <TouchableOpacity style={styles.calcularAgainBtn} onPress={props.voltar()}>
-        <Text style={{
-          justifyContent: 'center',
-          textAlign: 'center', fontSize: 18, color: '#fff', height: 45,
-          borderRadius: 50,
-        }}> Calcular novamente </Text>
-      </TouchableOpacity>
+      <ButtonAnimated 
+      animation="pulse"
+      iterationCount={Infinity}
+      duration={2000}
+      style={styles.calcularAgainBtn} onPress={props.voltar()}>
+        <Text style={styles.textBtnCalNovamente}> Calcular novamente </Text>
+      </ButtonAnimated>
 
     </View>
   )
@@ -57,15 +61,23 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   calcularAgainBtn: {
-    width: '50%',
+    width: '60%',
+    height: 50,
     borderWidth: 1,
     borderColor: 'red',
     borderRadius: 8,
     marginTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   btnFechar: {
     backgroundColor: 'red',
     width: 30,
     borderRadius: 20,
+  },
+  textBtnCalNovamente:{
+    fontSize: 18, 
+    color: '#fff', 
+    borderRadius: 50,
   }
 })
